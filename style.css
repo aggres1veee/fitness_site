@@ -1,0 +1,179 @@
+/* Custom Styles for EASY FIT Landing Page */
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 25px rgba(255, 184, 0, 0.35), inset 0 0 15px rgba(255, 184, 0, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(255, 184, 0, 0.6), inset 0 0 25px rgba(255, 184, 0, 0.3);
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientMove 6s ease infinite;
+}
+
+.shadow-gold {
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #08090C;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222634;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00FF66;
+}
+
+/* Modal and Chat scaling animation */
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.animate-scale-up {
+    animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slider Track */
+.slider-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.review-card {
+    min-width: 320px;
+    max-width: 380px;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .review-card {
+        min-width: 360px;
+        max-width: 420px;
+    }
+}
+
+/* AUTHENTIC SOCIAL ICONS & BUTTONS */
+.social-tg {
+    background-color: #229ED9 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(34, 158, 217, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.25s ease;
+}
+.social-tg:hover {
+    background-color: #1783b5 !important;
+    box-shadow: 0 6px 24px rgba(34, 158, 217, 0.7);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.social-insta {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(220, 39, 67, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.25s ease;
+}
+.social-insta:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 6px 24px rgba(220, 39, 67, 0.7);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.social-x {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+    transition: all 0.25s ease;
+}
+.social-x:hover {
+    background-color: #1a1a1a !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 6px 22px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* Custom Slider Thumb */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #00FF66;
+    cursor: pointer;
+    box-shadow: 0 0 12px #00FF66;
+    transition: transform 0.1s ease-in-out;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Button Typography Fixes */
+.btn-cta {
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    font-weight: 800;
+}
+
+/* CHAT WIDGET STYLES */
+.chat-window {
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 520px;
+    max-height: calc(100vh - 100px);
+}
+
+.chat-bubble-coach {
+    background: #1A1E29;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px 18px 18px 4px;
+}
+
+.chat-bubble-user {
+    background: linear-gradient(135deg, #00FF66 0%, #10B981 100%);
+    color: #000000;
+    font-weight: 600;
+    border-radius: 18px 18px 4px 18px;
+}
+
+/* Message pulse notification */
+@keyframes badgeBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+.animate-badge-bounce {
+    animation: badgeBounce 2s infinite ease-in-out;
+}

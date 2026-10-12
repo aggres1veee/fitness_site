@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Программы тренировок // EASY FIT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Unbounded"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#08090C',
+                            dark: '#0F1117',
+                            card: '#161922',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            neon: '#00FF66',
+                            lime: '#CCFF00',
+                            gold: '#FFB800',
+                            fire: '#FF3B30',
+                            purple: '#8B5CF6'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 35px -5px rgba(0, 255, 102, 0.4)',
+                        'gold': '0 0 45px -5px rgba(255, 184, 0, 0.45)',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-brand-black text-slate-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen relative overflow-x-hidden">
+
+    <!-- Ambient Blobs -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-neon/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed top-1/2 right-10 w-80 h-80 bg-brand-gold/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-brand-black/80 border-b border-white/[0.06]">
+        <div class="container mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Single Word EASYFIT Logo -->
+            <a href="index.html" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-neon to-brand-lime flex items-center justify-center text-black shadow-neon group-hover:scale-105 transition">
+                    <svg class="w-5 h-5 fill-black" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <span class="font-display font-black text-2xl tracking-tight text-white group-hover:text-brand-neon transition">
+                    EASYFIT
+                </span>
+            </a>
+
+            <!-- Desktop Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="index.html" class="hover:text-brand-neon transition flex items-center gap-1.5">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Главная
+                </a>
+                <a href="#fullbody" class="hover:text-brand-neon transition">Full Body</a>
+                <a href="#split" class="hover:text-brand-neon transition">Smart Split</a>
+                <a href="#nutrition" class="hover:text-brand-neon transition">Питание IIFYM</a>
+                <a href="index.html#tariffs" class="hover:text-brand-neon transition text-brand-lime">Выбрать тариф</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="index.html#tariffs" class="px-5 py-2.5 rounded-full font-display font-bold text-xs uppercase tracking-wider text-black bg-brand-neon shadow-neon hover:scale-105 transition">
+                    Занять место ⚡
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="py-16 md:py-24 border-b border-brand-border relative">
+        <div class="container mx-auto px-4 lg:px-8 text-center max-w-3xl">
+            <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-neon px-3 py-1 rounded-full bg-brand-neon/10 border border-brand-neon/20">
+                Биомеханика без духоты
+            </span>
+            <h1 class="font-display font-black text-3xl sm:text-5xl uppercase mt-4 mb-4">
+                Детальный разбор наших программ
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Почему они работают быстрее классических многочасовых тренировок и как с их помощью строить сухие рельефные мышцы, проводя в зале всего по 40 минут.
+            </p>
+        </div>
+    </section>
+
+    <!-- FULL BODY PROTOCOL -->
+    <section id="fullbody" class="py-20 border-b border-brand-border">
+        <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+            <div class="flex flex-col md:flex-row items-start justify-between gap-6 mb-12">
+                <div>
+                    <span class="px-3 py-1 rounded-lg text-xs font-extrabold uppercase bg-brand-lime/20 text-brand-lime border border-brand-lime/30">
+                        Протокол 01
+                    </span>
+                    <h2 class="font-display font-black text-3xl sm:text-4xl uppercase text-white mt-3">
+                        FULL BODY: "ЗАРЯД"
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Идеально для тех, кто занят на работе и ценит время</p>
+                </div>
+                <div class="px-4 py-2.5 rounded-2xl bg-brand-card border border-brand-border text-xs font-bold text-slate-300">
+                    ⏱️ 3 раза в неделю по 40-45 минут
+                </div>
+            </div>
+
+            <!-- Structure Grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                    <span class="text-xs font-bold text-brand-lime uppercase mb-2 block">Понедельник</span>
+                    <h3 class="font-display font-bold text-lg text-white mb-3">Тяжелый день (База)</h3>
+                    <ul class="text-xs text-slate-300 space-y-2">
+                        <li>• Присед со штангой или жим ногами (3x8)</li>
+                        <li>• Жим штанги или гантелей лежа (3x8)</li>
+                        <li>• Тяга штанги в наклоне к поясу (3x10)</li>
+                        <li>• Махи гантелями в стороны (3x12)</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                    <span class="text-xs font-bold text-brand-lime uppercase mb-2 block">Среда</span>
+                    <h3 class="font-display font-bold text-lg text-white mb-3">Объем и углы</h3>
+                    <ul class="text-xs text-slate-300 space-y-2">
+                        <li>• Румынская тяга с гантелями (3x10)</li>
+                        <li>• Жим гантелей на наклонной скамье (3x10)</li>
+                        <li>• Тяга верхнего блока к груди (3x10)</li>
+                        <li>• Французский жим плюс бицепс (3x12)</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                    <span class="text-xs font-bold text-brand-lime uppercase mb-2 block">Пятница</span>
+                    <h3 class="font-display font-bold text-lg text-white mb-3">Памп и рельеф</h3>
+                    <ul class="text-xs text-slate-300 space-y-2">
+                        <li>• Болгарские сплит-приседы (3x10)</li>
+                        <li>• Отжимания на брусьях с весом (3x10)</li>
+                        <li>• Горизонтальная тяга блока (3x12)</li>
+                        <li>• Разводка на заднюю дельту (3x15)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-brand-lime/10 border border-brand-lime/30 text-xs text-slate-300 leading-relaxed">
+                <b class="text-brand-lime">Почему это работает:</b> Каждая мышечная группа получает стимул 3 раза за неделю. Синтез белка поддерживается на максимуме круглые сутки, поэтому жир плавится быстрее, а мышцы не сдуваются.
+            </div>
+        </div>
+    </section>
+
+    <!-- SMART SPLIT PROTOCOL -->
+    <section id="split" class="py-20 border-b border-brand-border bg-brand-dark/30">
+        <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+            <div class="flex flex-col md:flex-row items-start justify-between gap-6 mb-12">
+                <div>
+                    <span class="px-3 py-1 rounded-lg text-xs font-extrabold uppercase bg-brand-neon/20 text-brand-neon border border-brand-neon/30">
+                        Протокол 02
+                    </span>
+                    <h2 class="font-display font-black text-3xl sm:text-4xl uppercase text-white mt-3">
+                        SMART SPLIT: "МЯСНОЙ РЕЛЬЕФ"
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Для тех, кто хочет максимальную гипертрофию и объем рук</p>
+                </div>
+                <div class="px-4 py-2.5 rounded-2xl bg-brand-card border border-brand-border text-xs font-bold text-slate-300">
+                    ⏱️ 3-4 раза в неделю по 45 минут
+                </div>
+            </div>
+
+            <!-- Structure Grid -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                    <span class="text-xs font-bold text-brand-neon uppercase mb-2 block">День А • Верх тела</span>
+                    <h3 class="font-display font-bold text-lg text-white mb-3">Грудь, Спина, Плечи</h3>
+                    <ul class="text-xs text-slate-300 space-y-2">
+                        <li>• Жим гантелей на наклонной скамье (4x8-10)</li>
+                        <li>• Подтягивания или тяга верхнего блока (4x10)</li>
+                        <li>• Армейский жим стоя с гантелями (3x10)</li>
+                        <li>• Суперсет на бицепс и трицепс (3x12)</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                    <span class="text-xs font-bold text-brand-neon uppercase mb-2 block">День Б • Низ тела и Кор</span>
+                    <h3 class="font-display font-bold text-lg text-white mb-3">Квадрицепс, Бицепс бедра, Пресс</h3>
+                    <ul class="text-xs text-slate-300 space-y-2">
+                        <li>• Фронтальный присед или жим платформы (4x8)</li>
+                        <li>• Сгибания ног лежа в тренажере (4x12)</li>
+                        <li>• Подъемы на носки стоя (4x15)</li>
+                        <li>• Подъемы ног в висе на пресс (3x15)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-brand-neon/10 border border-brand-neon/30 text-xs text-slate-300 leading-relaxed">
+                <b class="text-brand-neon">Фишка схемы:</b> Нагрузка разделена так, что верх тела получает двойной объем работы. Футболки садятся в обтяжку в груди и рукавах, а талия визуально кажется уже.
+            </div>
+        </div>
+    </section>
+
+    <!-- NUTRITION SECTION -->
+    <section id="nutrition" class="py-20 border-b border-brand-border">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl text-center">
+            <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-gold px-3 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/20">
+                Без голодовок
+            </span>
+            <h2 class="font-display font-black text-2xl sm:text-4xl uppercase mt-4 mb-4">
+                Как жрать бургеры и сохнуть
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                Система IIFYM (If It Fits Your Macros) - если это влезает в твои калории и норму белка, ты худеешь. Организм не отличает углеводы из риса от углеводов из теста пиццы, закон сохранения энергии работает на 100%.
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 text-left mb-10">
+                <div class="p-5 rounded-2xl bg-brand-card border border-brand-border">
+                    <div class="text-2xl mb-2">🥩</div>
+                    <h4 class="font-bold text-sm text-white mb-1">Норма белка</h4>
+                    <p class="text-xs text-slate-400">1.6 - 2.0 г на кг веса. Мышцы сохраняются, сытость на весь день.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-brand-card border border-brand-border">
+                    <div class="text-2xl mb-2">🍔</div>
+                    <h4 class="font-bold text-sm text-white mb-1">20% читмилов</h4>
+                    <p class="text-xs text-slate-400">Пятая часть дневных калорий может быть из любой еды, которую любишь.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-brand-card border border-brand-border">
+                    <div class="text-2xl mb-2">⚡</div>
+                    <h4 class="font-bold text-sm text-white mb-1">Ноль срывов</h4>
+                    <p class="text-xs text-slate-400">Когда нет жестких запретов, психика спокойна, и ты спокойно идешь к кубикам.</p>
+                </div>
+            </div>
+
+            <a href="index.html#tariffs" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-display font-black text-xs uppercase bg-gradient-to-r from-brand-neon to-brand-lime text-black shadow-neon hover:scale-105 transition">
+                Выбрать программу на главной ⚡
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-brand-black border-t border-brand-border text-slate-500 text-xs">
+        <div class="container mx-auto px-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <span class="font-display font-black text-white text-base tracking-tight">EASYFIT</span>
+                <span class="block text-[11px] text-slate-400 mt-0.5">Форма на чиле без кардио и диет</span>
+            </div>
+            <div class="flex items-center gap-6 font-semibold">
+                <a href="index.html" class="hover:text-brand-neon transition">Главная</a>
+                <a href="index.html#tariffs" class="hover:text-brand-neon transition">Тарифы</a>
+                <a href="https://t.me/aggres1veee" target="_blank" class="social-tg px-3.5 py-1.5 rounded-xl text-white font-bold inline-flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg> Telegram @aggres1veee
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

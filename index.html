@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EASYFIT</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Unbounded"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#08090C',
+                            dark: '#0F1117',
+                            card: '#161922',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            neon: '#00FF66',
+                            lime: '#CCFF00',
+                            gold: '#FFB800',
+                            goldDark: '#D97706',
+                            fire: '#FF3B30',
+                            purple: '#8B5CF6'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 35px -5px rgba(0, 255, 102, 0.4)',
+                        'gold': '0 0 45px -5px rgba(255, 184, 0, 0.45)',
+                        'fire': '0 0 35px -5px rgba(255, 59, 48, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-brand-black text-slate-100 font-sans antialiased selection:bg-brand-neon selection:text-black min-h-screen overflow-x-hidden relative">
+
+    <!-- Ambient Glow Blobs -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-neon/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed top-1/3 right-10 w-80 h-80 bg-brand-gold/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-brand-purple/10 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+
+    <!-- Top Announcement Bar with limited spots & Language Switcher -->
+    <div class="bg-gradient-to-r from-brand-card via-brand-dark to-brand-card border-b border-brand-border py-2 px-4 text-xs md:text-sm relative z-40">
+        <div class="container mx-auto flex flex-wrap items-center justify-between gap-2 font-medium">
+            <div class="flex items-center gap-2 mx-auto sm:mx-0">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-fire/20 text-brand-fire border border-brand-fire/30 animate-pulse" data-i18n="topBarBadge">
+                    МЕСТА ОГРАНИЧЕНЫ
+                </span>
+                <span class="text-slate-300" data-i18n="topBarText">На личное ведение в этом месяце осталось всего 3 места из 10.</span>
+                <a href="#tariffs" class="underline hover:text-brand-neon transition ml-1 font-semibold text-brand-neon flex items-center gap-1" data-i18n="topBarLink">
+                    Занять место <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+
+            <!-- Language Switcher Pill -->
+            <div class="flex items-center gap-1 bg-brand-black/90 p-1 rounded-full border border-brand-border mx-auto sm:mx-0">
+                <button type="button" class="lang-btn px-2.5 py-0.5 rounded-full text-[11px] font-bold transition-all bg-brand-neon text-black" data-lang="ru">
+                    RU
+                </button>
+                <button type="button" class="lang-btn px-2.5 py-0.5 rounded-full text-[11px] font-bold transition-all text-slate-400 hover:text-white" data-lang="en">
+                    EN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-brand-black/85 border-b border-white/[0.06] transition-all duration-300" id="mainHeader">
+        <div class="container mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- STYLISH SINGLE-WORD LOGO (NO SLASHES, NO SUBTITLES) -->
+            <a href="index.html" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-neon to-brand-lime flex items-center justify-center text-black shadow-neon group-hover:scale-105 transition">
+                    <svg class="w-5 h-5 fill-black" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <span class="font-display font-black text-2xl tracking-tight text-white group-hover:text-brand-neon transition">
+                    EASYFIT
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-7 text-xs xl:text-sm font-semibold text-slate-300">
+                <a href="#method" class="hover:text-brand-neon transition" data-i18n="navMethod">В чем фишка</a>
+                <a href="programs.html" class="hover:text-brand-neon transition flex items-center gap-1" data-i18n="navPrograms">
+                    Программы <i data-lucide="external-link" class="w-3.5 h-3.5 text-brand-neon"></i>
+                </a>
+                <a href="#testdrive" class="hover:text-brand-neon transition flex items-center gap-1.5 text-brand-lime" data-i18n="navTestDrive">
+                    <i data-lucide="dumbbell" class="w-4 h-4"></i> Тест-драйв
+                </a>
+                <a href="#calculator" class="hover:text-brand-neon transition flex items-center gap-1" data-i18n="navCalc">
+                    Калькулятор
+                </a>
+                <a href="#results" class="hover:text-brand-neon transition" data-i18n="navReviews">Отзывы</a>
+                <a href="#tariffs" class="hover:text-brand-neon transition" data-i18n="navTariffs">Тарифы</a>
+                <a href="#faq" class="hover:text-brand-neon transition" data-i18n="navFaq">Вопросы</a>
+            </nav>
+
+            <!-- Social Links & CTA Button -->
+            <div class="hidden sm:flex items-center gap-3">
+                <!-- Authentic Telegram Button -->
+                <a href="https://t.me/aggres1veee" target="_blank" class="social-tg w-9 h-9 rounded-xl flex items-center justify-center text-white" title="Telegram @aggres1veee">
+                    <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg>
+                </a>
+                <!-- Authentic Instagram Button with Real Vector Icon -->
+                <a href="https://instagram.com/easyfit_coach" target="_blank" class="social-insta w-9 h-9 rounded-xl flex items-center justify-center text-white" title="Instagram">
+                    <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <!-- Authentic X Button -->
+                <a href="https://x.com/easyfit_coach" target="_blank" class="social-x w-9 h-9 rounded-xl flex items-center justify-center text-white" title="X (Twitter)">
+                    <svg class="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+
+                <a href="https://t.me/aggres1veee?text=Привет,%20тренер!%20Хочу%20узнать%20про%20курс" target="_blank" class="btn-cta px-5 py-2.5 rounded-full font-display font-bold text-xs uppercase tracking-wider text-black bg-gradient-to-r from-brand-neon to-brand-lime hover:shadow-neon transition-all hover:scale-105 active:scale-95" data-i18n="btnJoinHeader">
+                    Ворваться ⚡
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-brand-dark/95 backdrop-blur-2xl border-b border-brand-border px-6 py-6 flex flex-col gap-4 text-base font-semibold">
+            <a href="#method" class="hover:text-brand-neon mobile-link" data-i18n="navMethod">В чем фишка</a>
+            <a href="programs.html" class="hover:text-brand-neon mobile-link flex items-center gap-1.5" data-i18n="navPrograms">
+                Программы (Сплит и Full Body) <i data-lucide="external-link" class="w-4 h-4 text-brand-neon"></i>
+            </a>
+            <a href="#testdrive" class="text-brand-lime hover:text-brand-neon mobile-link" data-i18n="navTestDrive">Тест-драйв тренировки</a>
+            <a href="#calculator" class="hover:text-brand-neon mobile-link" data-i18n="navCalc">Калькулятор формы</a>
+            <a href="#results" class="hover:text-brand-neon mobile-link" data-i18n="navReviews">До / После и отзывы</a>
+            <a href="#tariffs" class="hover:text-brand-neon mobile-link" data-i18n="navTariffs">Тарифы</a>
+            <a href="#faq" class="hover:text-brand-neon mobile-link" data-i18n="navFaq">Частые вопросы</a>
+
+            <!-- Authentic Social links row in mobile menu with real SVGs -->
+            <div class="flex items-center gap-3 pt-2">
+                <a href="https://t.me/aggres1veee" target="_blank" class="social-tg flex-1 py-2.5 rounded-xl text-center text-xs font-bold flex items-center justify-center gap-1.5">
+                    <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg> Telegram
+                </a>
+                <a href="https://instagram.com/easyfit_coach" target="_blank" class="social-insta flex-1 py-2.5 rounded-xl text-center text-xs font-bold flex items-center justify-center gap-1.5">
+                    <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Insta
+                </a>
+                <a href="https://x.com/easyfit_coach" target="_blank" class="social-x flex-1 py-2.5 rounded-xl text-center text-xs font-bold flex items-center justify-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Twitter
+                </a>
+            </div>
+
+            <a href="#tariffs" class="mt-2 text-center py-3 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-brand-neon to-brand-lime text-black mobile-link" data-i18n="btnJoinHeader">
+                Выбрать программу ⚡
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Top Badge -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-brand-neon/30 backdrop-blur-md mb-8 hover:border-brand-neon transition cursor-default">
+                    <span class="w-2 h-2 rounded-full bg-brand-neon animate-ping"></span>
+                    <span class="text-xs md:text-sm font-bold tracking-wide uppercase text-slate-200" data-i18n="heroBadge">
+                        Взлом системы - форма без страданий и диет
+                    </span>
+                </div>
+
+                <!-- Main Punchy Title -->
+                <h1 class="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.08] uppercase mb-8">
+                    <span data-i18n="heroTitle1">Делай форму в кайф.</span><br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon via-brand-lime to-brand-gold animate-gradient" data-i18n="heroTitle2">
+                        Жри что хочешь.
+                    </span><br>
+                    <span data-i18n="heroTitle3">Забудь про кардио.</span>
+                </h1>
+
+                <!-- Subtitle with Bro-logic meets Science -->
+                <p class="text-slate-300 text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto mb-10" data-i18n="heroSub">
+                    Фастовые тренировки по 40 минут. Без унылых дорожек, вареной грудки без соли и голодных обмороков. Точная биомеханика, кайфовый режим и кубики пресса на чистом расслабоне.
+                </p>
+
+                <!-- Action CTA & Secondary Trigger -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                    <a href="#tariffs" class="btn-cta w-full sm:w-auto px-7 py-4 rounded-2xl font-display font-black text-xs sm:text-sm uppercase tracking-wider text-black bg-gradient-to-r from-brand-neon to-brand-lime shadow-neon hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2" data-i18n="heroBtnTariff">
+                        Выбрать тариф (Имба внутри)
+                    </a>
+                    <a href="#calculator" class="btn-cta w-full sm:w-auto px-7 py-4 rounded-2xl font-display font-bold text-xs sm:text-sm uppercase tracking-wider text-white bg-brand-card/80 border border-brand-border hover:border-brand-neon/50 hover:bg-white/[0.05] transition-all flex items-center justify-center gap-2" data-i18n="heroBtnCalc">
+                        <i data-lucide="flame" class="w-4 h-4 text-brand-gold"></i> Рассчитать форму за 30 сек
+                    </a>
+                </div>
+
+                <!-- Fast Proof Counters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                    <div class="p-4 rounded-2xl bg-brand-card/60 border border-brand-border backdrop-blur-md">
+                        <div class="font-display font-black text-2xl md:text-3xl text-brand-neon mb-1" data-i18n="stat1Num">40 мин</div>
+                        <div class="text-xs text-slate-400 font-semibold uppercase" data-i18n="stat1Label">Длительность трели</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-brand-card/60 border border-brand-border backdrop-blur-md">
+                        <div class="font-display font-black text-2xl md:text-3xl text-brand-gold mb-1" data-i18n="stat2Num">0 мин</div>
+                        <div class="text-xs text-slate-400 font-semibold uppercase" data-i18n="stat2Label">Долбаного кардио</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-brand-card/60 border border-brand-border backdrop-blur-md">
+                        <div class="font-display font-black text-2xl md:text-3xl text-brand-lime mb-1" data-i18n="stat3Num">100%</div>
+                        <div class="text-xs text-slate-400 font-semibold uppercase" data-i18n="stat3Label">Любимой еды (IIFYM)</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-brand-card/60 border border-brand-border backdrop-blur-md">
+                        <div class="font-display font-black text-2xl md:text-3xl text-white mb-1" data-i18n="stat4Num">540+</div>
+                        <div class="text-xs text-slate-400 font-semibold uppercase" data-i18n="stat4Label">Челов уже в форме</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHENTIC SOCIAL MEDIA SECTION WITH CRISP SVG VECTORS -->
+    <section class="py-10 border-y border-brand-border bg-brand-dark/40">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+                <div>
+                    <h3 class="font-display font-bold text-base text-white" data-i18n="socialsTitle">Мои соцсети и лайфстайл</h3>
+                    <p class="text-xs text-slate-400" data-i18n="socialsSub">Подписывайся, там выкладываю разборы тарелок, биомеханику и угарные рилсы.</p>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <!-- Authentic Telegram @aggres1veee -->
+                    <a href="https://t.me/aggres1veee" target="_blank" class="social-tg px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2">
+                        <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg> Telegram @aggres1veee
+                    </a>
+                    <!-- Authentic Instagram with real camera icon -->
+                    <a href="https://instagram.com/easyfit_coach" target="_blank" class="social-insta px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2">
+                        <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Instagram
+                    </a>
+                    <!-- Authentic X with real vector mark -->
+                    <a href="https://x.com/easyfit_coach" target="_blank" class="social-x px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2">
+                        <svg class="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Twitter / X
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAIN VS GAIN SECTION -->
+    <section id="method" class="py-20 bg-brand-dark/50 border-b border-brand-border relative">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-fire px-3 py-1 rounded-full bg-brand-fire/10 border border-brand-fire/20" data-i18n="methodBadge">
+                    Хватит страдать
+                </span>
+                <h2 class="font-display font-black text-2xl sm:text-4xl uppercase mt-4 mb-4" data-i18n="methodTitle">
+                    Почему 95% сливаются в зале, а с нами - все изи?
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base" data-i18n="methodSub">
+                    Тебе годами вешали лапшу про сухую курицу, запрет углеводов после шести и бесконечные часы на беговой дорожке. Пора с этим завязывать.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Обычные тренеры-душнилы -->
+                <div class="rounded-3xl p-6 sm:p-8 bg-brand-card/40 border border-red-500/20 relative overflow-hidden group">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center font-bold">
+                            <i data-lucide="x-circle" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-red-300 uppercase" data-i18n="badTitle">Обычный фитнес ад</h3>
+                            <span class="text-xs text-slate-500 font-semibold" data-i18n="badSub">Как тебя мучают другие тренеры</span>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="frown" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
+                            <span data-i18n="bad1">Часовое унылое кардио на степпере или дорожке, от которого тошнит уже на десятой минуте.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
+                            <span data-i18n="bad2">Пресная еда из контейнеров, гречка, сухая грудка без соли, брокколи и вечный голод.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
+                            <span data-i18n="bad3">Торчишь в зале по два часа 5 дней в неделю, забивая на личную жизнь, работу и друзей.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="battery-low" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
+                            <span data-i18n="bad4">Итог - срыв через три недели, зажор, ненависть к зеркалу и потерянные деньги.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Наша система EASY FIT -->
+                <div class="rounded-3xl p-6 sm:p-8 bg-brand-card/80 border-2 border-brand-neon/40 relative overflow-hidden group shadow-neon/20 shadow-lg">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-brand-neon/20 text-brand-neon flex items-center justify-center font-bold">
+                                <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-brand-neon uppercase" data-i18n="goodTitle">Система EASY FIT</h3>
+                                <span class="text-xs text-brand-lime font-semibold" data-i18n="goodSub">Халява, наука и чистый кайф</span>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-neon text-black" data-i18n="goodBadge">
+                            ЧИТ-КОД
+                        </span>
+                    </div>
+
+                    <ul class="space-y-4 text-sm text-slate-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="zap" class="w-5 h-5 text-brand-neon shrink-0 mt-0.5"></i>
+                            <span data-i18n="good1">Фастовые тренировки по 40 минут три раза в неделю. Пришел, четко сделал базу, ушел довольный.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="pizza" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="good2">Жри что по кайфу, пицца, бургеры, шаурма вписываются в гибкий КБЖУ. Пресс виден, пока ты сыт.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="ban" class="w-5 h-5 text-brand-neon shrink-0 mt-0.5"></i>
+                            <span data-i18n="good3">Никакого бессмысленного кардио, жир горит за счет правильного метаболического отклика и дефицита.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="trophy" class="w-5 h-5 text-brand-lime shrink-0 mt-0.5"></i>
+                            <span data-i18n="good4">Итог - рельефные мышцы, бодрость и постоянный прогресс без выгорания.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНЫЙ ТЕСТ-ДРАЙВ ТРЕНИРОВКИ С ТАЙМЕРОМ -->
+    <section id="testdrive" class="py-20 border-b border-brand-border relative">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-lime px-3 py-1 rounded-full bg-brand-lime/10 border border-brand-lime/20" data-i18n="tdBadge">
+                    Бесплатный тест-драйв
+                </span>
+                <h2 class="font-display font-black text-2xl sm:text-4xl uppercase mt-4 mb-3" data-i18n="tdTitle">
+                    Попробуй одну тренировку прямо сейчас
+                </h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto" data-i18n="tdSub">
+                    Вот как выглядит типичный день по нашей системе. 4 базовых движения, таймер отдыха между подходами и ноль духоты.
+                </p>
+            </div>
+
+            <div class="rounded-3xl p-6 sm:p-8 bg-brand-card/80 border border-brand-border relative">
+                <!-- Interactive Rest Timer Widget -->
+                <div class="mb-8 p-5 rounded-2xl bg-brand-black border border-brand-border flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-neon/10 text-brand-neon flex items-center justify-center font-bold">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold text-slate-400 block" data-i18n="tdTimerTitle">Таймер отдыха между подходами</span>
+                            <span class="font-display font-black text-3xl text-brand-neon" id="restTimerDisplay">1:30</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" id="startRestTimerBtn" class="px-5 py-2.5 rounded-xl font-display font-bold text-xs uppercase bg-brand-neon text-black hover:shadow-neon transition" data-i18n="tdStartTimer">
+                            Старт 90 сек
+                        </button>
+                        <button type="button" id="resetRestTimerBtn" class="px-4 py-2.5 rounded-xl font-display font-bold text-xs uppercase bg-white/[0.05] border border-brand-border text-slate-300 hover:text-white transition" data-i18n="tdStopTimer">
+                            Сброс
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Exercise Checklist -->
+                <div class="space-y-3">
+                    <div class="exercise-item p-4 rounded-xl bg-white/[0.02] border border-brand-border flex items-center justify-between transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="exercise-check w-5 h-5 rounded border-slate-700 bg-brand-black accent-brand-neon cursor-pointer">
+                            <div>
+                                <h4 class="font-bold text-sm text-white" data-i18n="tdEx1">Жим гантелей на наклонной скамье</h4>
+                                <span class="text-xs text-slate-400" data-i18n="tdEx1Sub">3 подхода по 8-10 повторов • отдых 90 сек</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-brand-lime">Грудь</span>
+                    </div>
+
+                    <div class="exercise-item p-4 rounded-xl bg-white/[0.02] border border-brand-border flex items-center justify-between transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="exercise-check w-5 h-5 rounded border-slate-700 bg-brand-black accent-brand-neon cursor-pointer">
+                            <div>
+                                <h4 class="font-bold text-sm text-white" data-i18n="tdEx2">Тяга верхнего блока к груди</h4>
+                                <span class="text-xs text-slate-400" data-i18n="tdEx2Sub">3 подхода по 10-12 повторов • отдых 90 сек</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-brand-neon">Спина</span>
+                    </div>
+
+                    <div class="exercise-item p-4 rounded-xl bg-white/[0.02] border border-brand-border flex items-center justify-between transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="exercise-check w-5 h-5 rounded border-slate-700 bg-brand-black accent-brand-neon cursor-pointer">
+                            <div>
+                                <h4 class="font-bold text-sm text-white" data-i18n="tdEx3">Болгарские сплит-приседы с гантелями</h4>
+                                <span class="text-xs text-slate-400" data-i18n="tdEx3Sub">3 подхода по 10 повторов на ногу • отдых 90 сек</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-brand-gold">Ноги</span>
+                    </div>
+
+                    <div class="exercise-item p-4 rounded-xl bg-white/[0.02] border border-brand-border flex items-center justify-between transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="exercise-check w-5 h-5 rounded border-slate-700 bg-brand-black accent-brand-neon cursor-pointer">
+                            <div>
+                                <h4 class="font-bold text-sm text-white" data-i18n="tdEx4">Подъемы гантелей через стороны (плечи)</h4>
+                                <span class="text-xs text-slate-400" data-i18n="tdEx4Sub">3 подхода по 12-15 повторов • отдых 60 сек</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-brand-lime">Плечи</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-brand-border flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span class="text-xs text-slate-400 text-center sm:text-left" data-i18n="tdDoneNote">Всего 40 минут. Занимайся так 3 раза в неделю и забудь про беговые дорожки.</span>
+                    <a href="programs.html" class="btn-cta text-xs font-display font-bold uppercase text-brand-neon hover:underline flex items-center gap-1.5">
+                        Смотреть все программы подробно <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE "КАЛЬКУЛЯТОР ХАЛЯВЫ" -->
+    <section id="calculator" class="py-20 relative border-b border-brand-border">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-4xl mx-auto rounded-3xl bg-gradient-to-b from-brand-card to-brand-dark p-6 sm:p-10 border border-brand-border shadow-2xl relative">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-lime px-3 py-1 rounded-full bg-brand-lime/10 border border-brand-lime/20" data-i18n="calcBadge">
+                        Интерактивный расчет
+                    </span>
+                    <h2 class="font-display font-black text-2xl sm:text-3xl uppercase mt-3 mb-2" data-i18n="calcTitle">
+                        Калькулятор твоей формы
+                    </h2>
+                    <p class="text-slate-400 text-sm" data-i18n="calcSub">
+                        Укажи свои параметры и любимый читмил - узнай сколько калорий и недель нужно до кубиков.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Controls -->
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2" data-i18n="calcGenderLabel">Твой пол</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" class="calc-gender-btn active py-2.5 px-4 rounded-xl text-sm font-bold border border-brand-neon bg-brand-neon/10 text-brand-neon transition" data-gender="male" data-i18n="calcMale">
+                                    Парень ⚡
+                                </button>
+                                <button type="button" class="calc-gender-btn py-2.5 px-4 rounded-xl text-sm font-bold border border-brand-border bg-white/[0.02] text-slate-400 hover:text-white transition" data-gender="female" data-i18n="calcFemale">
+                                    Девушка 🌸
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase text-slate-300 mb-2">
+                                <span data-i18n="calcWeightLabel">Текущий вес</span>
+                                <span class="text-brand-neon font-display" id="weightVal">82 кг</span>
+                            </div>
+                            <input type="range" id="weightSlider" min="45" max="130" value="82" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-neon">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2" data-i18n="calcGoalLabel">Главная цель</label>
+                            <select id="goalSelect" class="w-full bg-brand-black border border-brand-border rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-brand-neon transition">
+                                <option value="cut">Сжечь жир до пресса (сушка без голода)</option>
+                                <option value="recomp" selected>Рекомпозиция (сжечь сало плюс добавить мышц)</option>
+                                <option value="bulk">Набрать чистую массу без пуза</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2" data-i18n="calcCheatLabel">Твой любимый читмил</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" class="cheat-meal-btn active p-2 rounded-xl text-xs font-bold border border-brand-gold bg-brand-gold/10 text-brand-gold transition text-center" data-meal="burger">
+                                    🍔 Бургер
+                                </button>
+                                <button type="button" class="cheat-meal-btn p-2 rounded-xl text-xs font-bold border border-brand-border bg-white/[0.02] text-slate-400 hover:text-white transition text-center" data-meal="pizza">
+                                    🍕 Пицца
+                                </button>
+                                <button type="button" class="cheat-meal-btn p-2 rounded-xl text-xs font-bold border border-brand-border bg-white/[0.02] text-slate-400 hover:text-white transition text-center" data-meal="shawarma">
+                                    🌯 Шаурма
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Panel -->
+                    <div class="rounded-2xl p-6 bg-brand-black/80 border border-brand-border relative overflow-hidden flex flex-col justify-between h-full">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between border-b border-brand-border pb-3">
+                                <span class="text-xs uppercase text-slate-400 font-bold" data-i18n="calcCaloriesTitle">Дневной калораж в кайф</span>
+                                <span class="font-display font-black text-2xl text-brand-neon" id="calcCalories">2 350 ккал</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-brand-border pb-3">
+                                <span class="text-xs uppercase text-slate-400 font-bold" data-i18n="calcTrainingsTitle">Тренировок в неделю</span>
+                                <span class="font-display font-bold text-lg text-white">3 по 40 мин</span>
+                            </div>
+                            <div class="flex items-center justify-between border-b border-brand-border pb-3">
+                                <span class="text-xs uppercase text-slate-400 font-bold" data-i18n="calcWeeksTitle">Срок до первых кубиков</span>
+                                <span class="font-display font-bold text-lg text-brand-lime" id="calcWeeks">5-7 недель</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-brand-gold/10 border border-brand-gold/30 text-xs text-brand-gold font-medium" data-i18n="calcVerdict">
+                                💡 <b>Вердикт:</b> твой читмил на 100% влезает в калории, кардио делать не надо!
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-brand-border text-center">
+                            <a href="#tariffs" class="btn-cta w-full block py-3 rounded-xl font-display font-bold text-xs uppercase bg-brand-neon text-black hover:shadow-neon transition" data-i18n="calcBtn">
+                                Подобрать программу под эти цифры ⚡
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARIFFS & PRICING: ГЛАВНЫЙ БЛОК ПРОДАЖ С ПУШЕЧНЫМ АКЦЕНТОМ НА VIP -->
+    <section id="tariffs" class="py-24 relative overflow-hidden border-b border-brand-border">
+        <!-- Background Lighting -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-r from-brand-gold/15 to-brand-neon/15 blur-[160px] pointer-events-none -z-10"></div>
+
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <!-- Urgency Countdown Trigger -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-fire/10 border border-brand-fire/30 text-brand-fire text-xs font-extrabold uppercase mb-4 animate-pulse">
+                    <i data-lucide="timer" class="w-4 h-4"></i> <span data-i18n="tariffsBadge">Скидка 40% сгорает через</span> <span id="dealTimer">03:42:18</span>
+                </div>
+                <h2 class="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight mb-4" data-i18n="tariffsTitle">
+                    Выбери свой уровень входа
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto" data-i18n="tariffsSub">
+                    Хочешь - делай сам по инструкции. Хочешь - заходи в движ. А хочешь гарантированный результат за руку со мной - забирай Личное ведение.
+                </p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+
+                <!-- TIER 1: СОЛО СТАРТ -->
+                <div class="rounded-3xl p-7 bg-brand-card/40 border border-brand-border flex flex-col justify-between hover:border-slate-700 transition relative">
+                    <div>
+                        <div class="mb-4">
+                            <span class="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700" data-i18n="t1Badge">
+                                Базовый соло
+                            </span>
+                        </div>
+                        <h3 class="font-display font-black text-xl uppercase text-slate-200 mb-1" data-i18n="t1Title">
+                            СОЛО СТАРТ
+                        </h3>
+                        <p class="text-xs text-slate-400 mb-6" data-i18n="t1Sub">
+                            Чисто база для тех, кто все умеет сам и не нуждается в пинках.
+                        </p>
+
+                        <!-- Price -->
+                        <div class="mb-6 pb-6 border-b border-brand-border">
+                            <div class="text-xs text-slate-500 line-through font-bold">3 990 ₽</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="font-display font-black text-3xl text-white" data-i18n="t1Price">1 990 ₽</span>
+                                <span class="text-xs text-slate-400 font-semibold" data-i18n="t1Period">разово</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3.5 text-xs text-slate-300 mb-8">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                                <span>Программа тренировок (Full Body + Сплит) в PDF</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                                <span>Базовый расчет КБЖУ без голодовок</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                                <span>Чек-лист основных ошибок в технике</span>
+                            </li>
+                            <li class="flex items-center gap-2.5 text-slate-500">
+                                <i data-lucide="x" class="w-4 h-4 text-slate-600 shrink-0"></i>
+                                <span>Без доступа в закрытый Telegram-канал</span>
+                            </li>
+                            <li class="flex items-center gap-2.5 text-slate-500">
+                                <i data-lucide="x" class="w-4 h-4 text-slate-600 shrink-0"></i>
+                                <span>Без ответов на вопросы и чата</span>
+                            </li>
+                            <li class="flex items-center gap-2.5 text-slate-500">
+                                <i data-lucide="x" class="w-4 h-4 text-slate-600 shrink-0"></i>
+                                <span>Без проверки техники и личного ведения</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="tariff-select-btn btn-cta w-full py-3.5 rounded-xl font-display font-bold text-xs uppercase tracking-wider text-slate-300 bg-white/[0.04] border border-brand-border hover:bg-white/[0.08] hover:text-white transition" data-tariff="solo" data-price="1 990 ₽" data-name="СОЛО СТАРТ" data-i18n="t1Btn">
+                        Забрать базу за 1 990 ₽
+                    </button>
+                </div>
+
+                <!-- TIER 2: ДВИЖ / ТЕЛЕГРАМ КОМЬЮНИТИ -->
+                <div class="rounded-3xl p-7 bg-brand-card/70 border border-brand-neon/30 flex flex-col justify-between hover:border-brand-neon transition relative">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-brand-neon/20 text-brand-neon border border-brand-neon/30" data-i18n="t2Badge">
+                                Комьюнити
+                            </span>
+                        </div>
+                        <h3 class="font-display font-black text-xl uppercase text-white mb-1" data-i18n="t2Title">
+                            ДВИЖ + ТЕЛЕГА
+                        </h3>
+                        <p class="text-xs text-slate-300 mb-6" data-i18n="t2Sub">
+                            Для нормальных челов: программа плюс доступ в Telegram с ответами на вопросы.
+                        </p>
+
+                        <!-- Price -->
+                        <div class="mb-6 pb-6 border-b border-brand-border">
+                            <div class="text-xs text-slate-500 line-through font-bold">8 990 ₽</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="font-display font-black text-3xl text-brand-neon" data-i18n="t2Price">4 990 ₽</span>
+                                <span class="text-xs text-slate-400 font-semibold" data-i18n="t2Period">разово</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3.5 text-xs text-slate-200 mb-8">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-neon shrink-0"></i>
+                                <span>Полные программы тренировок с видео базой</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-neon shrink-0"></i>
+                                <span><b>Доступ в закрытый Telegram-канал и чат</b></span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-neon shrink-0"></i>
+                                <span><b>Возможность задавать вопросы тренеру в чате</b></span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-neon shrink-0"></i>
+                                <span>Еженедельные прямые эфиры с разборами</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-neon shrink-0"></i>
+                                <span>Гайд как есть в общепите и сушиться</span>
+                            </li>
+                            <li class="flex items-center gap-2.5 text-slate-500">
+                                <i data-lucide="x" class="w-4 h-4 text-slate-600 shrink-0"></i>
+                                <span>Без личного чата в ЛС и разбора видео</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="tariff-select-btn btn-cta w-full py-3.5 rounded-xl font-display font-bold text-xs uppercase tracking-wider text-black bg-brand-neon hover:shadow-neon transition" data-tariff="community" data-price="4 990 ₽" data-name="ДВИЖ + ТЕЛЕГА" data-i18n="t2Btn">
+                        Вступить в движ за 4 990 ₽
+                    </button>
+                </div>
+
+                <!-- TIER 3: ЛИЧНОЕ ВЕДЕНИЕ (ИМБА / VIP / ХИТ ПРОДАЖ) -->
+                <div class="rounded-3xl p-7 bg-gradient-to-b from-brand-card via-brand-dark to-brand-black border-2 border-brand-gold shadow-gold flex flex-col justify-between relative transform lg:-translate-y-3 hover:scale-[1.02] transition-all duration-300">
+                    
+                    <!-- Floating Ultimate Badge -->
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                        <span class="px-4 py-1.5 rounded-full text-[11px] font-display font-black uppercase tracking-wider bg-gradient-to-r from-brand-gold to-amber-500 text-black shadow-lg flex items-center gap-1.5" data-i18n="t3BadgeTop">
+                            👑 САМАЯ ИМБА • ВЫБОР 84%
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-3 mt-2">
+                            <span class="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wide bg-brand-gold/20 text-brand-gold border border-brand-gold/30" data-i18n="t3BadgeInner">
+                                All-Inclusive VIP
+                            </span>
+                            <span class="text-[11px] font-extrabold text-brand-fire flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-brand-fire animate-ping"></span> <span data-i18n="t3Seats">Осталось 3 места</span>
+                            </span>
+                        </div>
+
+                        <h3 class="font-display font-black text-2xl uppercase text-brand-gold mb-1 flex items-center gap-2" data-i18n="t3Title">
+                            ЛИЧНОЕ ВЕДЕНИЕ <i data-lucide="sparkles" class="w-5 h-5 text-brand-gold"></i>
+                        </h3>
+                        <p class="text-xs text-slate-300 mb-6" data-i18n="t3Sub">
+                            Я лично беру тебя за шкирку и довожу до идеальной формы. Общаемся в ЛС Telegram 24/7.
+                        </p>
+
+                        <!-- Price -->
+                        <div class="mb-6 pb-6 border-b border-brand-border">
+                            <div class="text-xs text-slate-500 line-through font-bold">25 000 ₽</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="font-display font-black text-4xl text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-amber-300 to-yellow-200" data-i18n="t3Price">
+                                    12 990 ₽
+                                </span>
+                                <span class="text-xs text-slate-300 font-semibold" data-i18n="t3Period">/ месяц</span>
+                            </div>
+                            <span class="text-[11px] text-brand-lime font-bold mt-1 block" data-i18n="t3Guarantee">
+                                🔥 100% Гарантия результата или манибэк!
+                            </span>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 text-xs text-slate-100 mb-8">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0 mt-0.5"></i>
+                                <span><b>Личный чат со мной в Telegram 1-на-1</b> (голосовые, ответы в течение часа)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0 mt-0.5"></i>
+                                <span><b>Разбор видео твоей техники:</b> скидываешь подходы в ЛС, я правлю каждый миллиметр</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0 mt-0.5"></i>
+                                <span><b>Индивидуальный план под твою жизнь:</b> переписываю тренировки и калории каждую неделю</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0 mt-0.5"></i>
+                                <span><b>Еженедельный аудит формы:</b> замеры, вес, фотоконтроль, чтобы прогресс не вставал</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0 mt-0.5"></i>
+                                <span><b>Все из тарифа Движ включено</b> (чат, база, видео)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="shield-check" class="w-4 h-4 text-brand-lime shrink-0 mt-0.5"></i>
+                                <span class="text-brand-lime font-bold">Личный созвон в начале для выстраивания стратегии</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="tariff-select-btn btn-cta w-full py-4 rounded-xl font-display font-black text-xs uppercase tracking-wider text-black bg-gradient-to-r from-brand-gold via-yellow-400 to-amber-500 shadow-gold hover:scale-[1.03] active:scale-95 transition-all flex items-center justify-center gap-2" data-tariff="vip" data-price="12 990 ₽" data-name="ЛИЧНОЕ ВЕДЕНИЕ (VIP)" data-i18n="t3Btn">
+                        <span>Забрать Личное Ведение (Имба) 👑</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- REAL BEFORE / AFTER PHOTOS -->
+    <section id="results" class="py-20 bg-brand-dark/40 border-b border-brand-border">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-neon px-3 py-1 rounded-full bg-brand-neon/10 border border-brand-neon/20">
+                    Реальные фотки
+                </span>
+                <h2 class="font-display font-black text-2xl sm:text-4xl uppercase mt-4 mb-3">
+                    До и после без фотошопа
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Настоящие фотографии парней, которые тренировались по 40 минут и ели любимую еду.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Case 1: Alex -->
+                <div class="rounded-3xl p-5 bg-brand-card/70 border border-brand-border flex flex-col justify-between hover:border-brand-neon/40 transition">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-display font-black text-base text-white">Максим, 28 лет</span>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-brand-neon/20 text-brand-neon">-14 кг за 10 нед</span>
+                        </div>
+                        
+                        <!-- Real Photo Container -->
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-white/10 relative group">
+                            <img src="images/alex.jpg" alt="Максим до и после" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-md text-[10px] font-bold text-brand-neon">
+                                🍔 Ел шаурму по пятницам
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed italic">
+                            "Думал без 2-часового бега пузо не уйдет. Занимался чисто по Full Body 3 раза по 40 мин перед работой. Пресс вылез уже к концу второго месяца."
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>Тариф: <b>Личное ведение</b></span>
+                        <span class="text-brand-lime font-bold">Кардио: 0 мин</span>
+                    </div>
+                </div>
+
+                <!-- Case 2: Artem -->
+                <div class="rounded-3xl p-5 bg-brand-card/70 border border-brand-border flex flex-col justify-between hover:border-brand-gold/40 transition">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-display font-black text-base text-white">Артем, 32 года</span>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-brand-gold/20 text-brand-gold">+5.5 кг мышц</span>
+                        </div>
+
+                        <!-- Real Photo Container -->
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-white/10 relative group">
+                            <img src="images/artem.jpg" alt="Артем до и после" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-md text-[10px] font-bold text-brand-gold">
+                                🍕 Пицца на выходных
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed italic">
+                            "Был дрищом с животом. Сплит-программа дала сочнейшие плечи и спину. Впервые футболки сидят в обтяг на руках, а не на талии. Тренер в ЛС отвечал сразу."
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>Тариф: <b>Личное ведение</b></span>
+                        <span class="text-brand-gold font-bold">Питание: IIFYM</span>
+                    </div>
+                </div>
+
+                <!-- Case 3: Denis -->
+                <div class="rounded-3xl p-5 bg-brand-card/70 border border-brand-border flex flex-col justify-between hover:border-brand-neon/40 transition">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-display font-black text-base text-white">Денис, 25 лет</span>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-brand-neon/20 text-brand-neon">-9 кг рельефа</span>
+                        </div>
+
+                        <!-- Real Photo Container -->
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-white/10 relative group">
+                            <img src="images/denis.jpg" alt="Денис до и после" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-md text-[10px] font-bold text-brand-lime">
+                                ⚡ V-образная спина
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed italic">
+                            "В закрытом чате телеги атмосфера дикая. Парни скидывают тарелки, тренер поясняет за технику. Взял тариф Движ, все четко и понятно."
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>Тариф: <b>Движ + Телега</b></span>
+                        <span class="text-brand-lime font-bold">Время: 40 мин</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REAL REVIEWS SLIDER -->
+    <section class="py-20 border-b border-brand-border relative overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12">
+                <div>
+                    <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-neon px-3 py-1 rounded-full bg-brand-neon/10 border border-brand-neon/20" data-i18n="reviewsBadge">
+                        Живые отзывы в телеге
+                    </span>
+                    <h2 class="font-display font-black text-2xl sm:text-3xl uppercase mt-3" data-i18n="reviewsTitle">
+                        Что пишут челы в закрытом чате
+                    </h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1" data-i18n="reviewsSub">
+                        Без купюр, без цензуры. Листай отзывы парней, которые уже сделали форму.
+                    </p>
+                </div>
+
+                <!-- Slider Controls -->
+                <div class="flex items-center gap-2">
+                    <button id="reviewsPrevBtn" class="w-11 h-11 rounded-xl bg-brand-card border border-brand-border text-white hover:border-brand-neon hover:text-brand-neon transition flex items-center justify-center">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button id="reviewsNextBtn" class="w-11 h-11 rounded-xl bg-brand-card border border-brand-border text-white hover:border-brand-neon hover:text-brand-neon transition flex items-center justify-center">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slider Wrapper -->
+            <div class="overflow-hidden">
+                <div id="reviewsTrack" class="slider-track gap-6">
+
+                    <!-- Review 1 -->
+                    <div class="review-card p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center">
+                                ИК
+                            </div>
+                            <div>
+                                <span class="font-bold text-sm text-white block">Игорь К. (@igor_tech)</span>
+                                <span class="text-[11px] text-slate-400">Тариф: Личное ведение</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            "Здорово, крч взвесился сегодня утром, 79.4! Впервые за 3 года меньше 80. При том что в субботу заказывал пиццу и выпил пива с пацанами. Твой сплит реально пушка, мышцы плотные."
+                        </p>
+                        <div class="text-[10px] text-slate-500 font-mono">Вчера в 09:42 в Telegram</div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center">
+                                АВ
+                            </div>
+                            <div>
+                                <span class="font-bold text-sm text-white block">Артур (@artur_v)</span>
+                                <span class="text-[11px] text-slate-400">Тариф: Движ + Телега</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            "Бро, плечи прям расперло, коллеги на работе спросили не курсил ли я ахах. Трели по 40 мин перед сменой это кайф, энергии вагон, в зале больше не торчу по 2 часа."
+                        </p>
+                        <div class="text-[10px] text-slate-500 font-mono">11 октября в 18:15</div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="review-card p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center">
+                                РМ
+                            </div>
+                            <div>
+                                <span class="font-bold text-sm text-white block">Руслан (@ruslan_m)</span>
+                                <span class="text-[11px] text-slate-400">Тариф: Личное ведение</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            "Сначала думал разводняк что без кардио вес уйдет. В итоге минус 6 кг за месяц, ел шавуху после работы в рамках КБЖУ. Тренер за видео разборы техники отдельный респект, колени перестали хрустеть."
+                        </p>
+                        <div class="text-[10px] text-slate-500 font-mono">9 октября в 21:04</div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="review-card p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center">
+                                СТ
+                            </div>
+                            <div>
+                                <span class="font-bold text-sm text-white block">Сергей (@serg_t)</span>
+                                <span class="text-[11px] text-slate-400">Тариф: Движ + Телега</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            "Наконец-то без гречки и сухой куриной подошвы. Жена в шоке, говорит пресс появился. Чат в телеге очень мотивирует, парням салют!"
+                        </p>
+                        <div class="text-[10px] text-slate-500 font-mono">7 октября в 14:30</div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="review-card p-6 rounded-2xl bg-brand-card/70 border border-brand-border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-rose-500/20 text-rose-400 font-bold flex items-center justify-center">
+                                ВП
+                            </div>
+                            <div>
+                                <span class="font-bold text-sm text-white block">Владислав (@vlad_p)</span>
+                                <span class="text-[11px] text-slate-400">Тариф: Личное ведение</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            "Личное ведение стоит каждого рубля. За 2 месяца ни одного срыва, форма как в 18 лет не была. Спасибо за адекватность и юмор, без этой спортивной шизы."
+                        </p>
+                        <div class="text-[10px] text-slate-500 font-mono">4 октября в 12:11</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Dots Indicator -->
+            <div id="reviewsDots" class="flex items-center justify-center gap-2 mt-8"></div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION (ACCORDION) -->
+    <section id="faq" class="py-20 bg-brand-dark/30 border-b border-brand-border">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-neon px-3 py-1 rounded-full bg-brand-neon/10 border border-brand-neon/20">
+                    Вопросы без воды
+                </span>
+                <h2 class="font-display font-black text-2xl sm:text-4xl uppercase mt-4 mb-3">
+                    Частые вопросы новичков
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Остались сомнения? Давай разложим все по полочкам прямо сейчас.
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- Question 1 -->
+                <div class="faq-item rounded-2xl bg-brand-card/70 border border-brand-border overflow-hidden transition">
+                    <button class="faq-btn w-full p-5 text-left flex items-center justify-between font-display font-bold text-sm sm:text-base text-white hover:text-brand-neon transition">
+                        <span>Реально можно есть бургеры и пиццу и худеть?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-brand-border/40 pt-4">
+                        Да, абсолютно реально. Твоему телу без разницы откуда пришли углеводы и жиры, закон сохранения энергии и физиология едины для всех. Главное - общий суточный баланс калорий и норма белка. На курсе я научу тебя гибкой диете (IIFYM), при которой любимая еда органично вписывается в дневной калораж, а жир горит без срывов.
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="faq-item rounded-2xl bg-brand-card/70 border border-brand-border overflow-hidden transition">
+                    <button class="faq-btn w-full p-5 text-left flex items-center justify-between font-display font-bold text-sm sm:text-base text-white hover:text-brand-neon transition">
+                        <span>Почему совсем нет кардио? Разве не на дорожке горит жир?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-brand-border/40 pt-4">
+                        За час бега ты сожжешь максимум 300-400 ккал (одна шоколадка), но убьешь колени, взвинтишь кортизол и зверский аппетит. Силовой тренинг растит мышечную ткань, которая расходует калории круглосуточно, даже когда ты спишь. Дефицит создается питанием, а форма и тонус - короткими силовыми.
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="faq-item rounded-2xl bg-brand-card/70 border border-brand-border overflow-hidden transition">
+                    <button class="faq-btn w-full p-5 text-left flex items-center justify-between font-display font-bold text-sm sm:text-base text-white hover:text-brand-neon transition">
+                        <span>Я полный новичок и боюсь выглядеть глупо в зале. Подойдет?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-brand-border/40 pt-4">
+                        Идеально подойдет! Программа составлена так, что каждое упражнение снабжено коротким видео-гайдом без заумных терминов. А если возьмешь Личное ведение, ты просто снимешь свое упражнение на телефон, скинешь мне в Telegram @aggres1veee, и я скажу что поправить, как будто стою рядом с тобой.
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="faq-item rounded-2xl bg-brand-card/70 border border-brand-border overflow-hidden transition">
+                    <button class="faq-btn w-full p-5 text-left flex items-center justify-between font-display font-bold text-sm sm:text-base text-white hover:text-brand-neon transition">
+                        <span>Почему тариф Личное ведение окупается в первый же месяц?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-brand-border/40 pt-4">
+                        Потому что здесь ты покупаешь гарантированный результат. Я нахожусь в твоем телефоне каждый день: контролирую прогресс, корректирую веса, подбадриваю, не даю слиться и экономлю тебе месяцы бесполезных попыток.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA BANNER -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-4xl mx-auto rounded-3xl p-8 sm:p-14 bg-gradient-to-r from-brand-card via-brand-dark to-brand-card border-2 border-brand-neon shadow-neon text-center relative overflow-hidden">
+                <span class="text-xs font-bold font-display uppercase tracking-widest text-brand-neon px-4 py-1.5 rounded-full bg-brand-neon/20 border border-brand-neon/40 inline-block mb-6">
+                    ⚡ ТВОЙ НОВЫЙ СТАРТ
+                </span>
+
+                <h2 class="font-display font-black text-2xl sm:text-4xl md:text-5xl uppercase mb-6 leading-tight" data-i18n="ctaBannerTitle">
+                    Хватит откладывать до понедельника. Делай форму уже на этой неделе!
+                </h2>
+
+                <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8" data-i18n="ctaBannerSub">
+                    Никаких страданий, голода и уныния. Только сочные тренировки, вкусная еда и тело, от которого ты сам будешь кайфовать в зеркале.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://t.me/aggres1veee?text=Привет,%20тренер!%20Хочу%20занять%20место%20на%20курс" target="_blank" class="btn-cta w-full sm:w-auto px-8 py-4 rounded-2xl font-display font-black text-xs sm:text-sm uppercase tracking-wider text-black bg-gradient-to-r from-brand-neon to-brand-lime shadow-neon hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                        Занять место на курсе 👑
+                    </a>
+                    <a href="https://t.me/aggres1veee?text=Йоу,%20тренер!%20Есть%20вопрос%20по%20программе" target="_blank" class="btn-cta w-full sm:w-auto px-8 py-4 rounded-2xl font-display font-bold text-xs sm:text-sm uppercase tracking-wider text-brand-gold bg-brand-gold/10 border border-brand-gold/40 hover:bg-brand-gold hover:text-black transition flex items-center justify-center gap-2">
+                        Написать тренеру в Telegram (@aggres1veee) 💬
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER WITH SOCIALS -->
+    <footer class="border-t border-brand-border py-12 bg-brand-black text-slate-500 text-xs">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-neon to-brand-lime flex items-center justify-center text-black shadow-neon">
+                        <svg class="w-4 h-4 fill-black" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <div>
+                        <span class="font-display font-black text-lg text-white tracking-tight">EASYFIT</span>
+                        <span class="block text-[10px] text-slate-400">© 2026 Все права защищены. Твой личный чит-код к форме.</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-6 font-semibold">
+                    <a href="#method" class="hover:text-brand-neon transition" data-i18n="navMethod">В чем фишка</a>
+                    <a href="programs.html" class="hover:text-brand-neon transition" data-i18n="navPrograms">Программы</a>
+                    <a href="#tariffs" class="hover:text-brand-neon transition" data-i18n="navTariffs">Тарифы</a>
+                    <a href="#faq" class="hover:text-brand-neon transition" data-i18n="navFaq">FAQ</a>
+                </div>
+
+                <!-- Authentic Socials in Footer with pure SVGs -->
+                <div class="flex items-center gap-3">
+                    <a href="https://t.me/aggres1veee" target="_blank" class="social-tg w-8 h-8 rounded-lg flex items-center justify-center text-white" title="Telegram @aggres1veee">
+                        <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg>
+                    </a>
+                    <a href="https://instagram.com/easyfit_coach" target="_blank" class="social-insta w-8 h-8 rounded-lg flex items-center justify-center text-white" title="Instagram">
+                        <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://x.com/easyfit_coach" target="_blank" class="social-x w-8 h-8 rounded-lg flex items-center justify-center text-white" title="X (Twitter)">
+                        <svg class="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE CHECKOUT / LEAD MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-brand-card border border-brand-border rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl modal-card animate-scale-up">
+            <!-- Close Button -->
+            <button id="modalCloseBtn" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <span id="modalBadge" class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase bg-brand-gold/20 text-brand-gold border border-brand-gold/30 inline-block mb-2">
+                    ВЫБРАННЫЙ ТАРИФ
+                </span>
+                <h3 id="modalTariffName" class="font-display font-black text-2xl uppercase text-white">
+                    ЛИЧНОЕ ВЕДЕНИЕ (VIP)
+                </h3>
+                <div class="mt-2 flex items-center justify-center gap-2">
+                    <span class="text-xs text-slate-400">Стоимость участия:</span>
+                    <span id="modalTariffPrice" class="font-display font-black text-xl text-brand-neon">12 990 ₽</span>
+                </div>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="orderForm" class="space-y-4">
+                <input type="hidden" id="formTariffField" value="vip">
+                
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Как тебя зовут?</label>
+                    <input type="text" id="userName" required placeholder="Например, Александр" class="w-full bg-brand-black border border-brand-border rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-neon transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Твой Telegram (@username) или Телефон</label>
+                    <input type="text" id="userContact" required placeholder="@username в Telegram" class="w-full bg-brand-black border border-brand-border rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-neon transition">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Что хочешь сделать в первую очередь?</label>
+                    <select id="userGoal" class="w-full bg-brand-black border border-brand-border rounded-xl px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-brand-neon transition">
+                        <option value="lose_belly">Убрать пузо и увидеть пресс</option>
+                        <option value="gain_muscle">Набрать сочные плечи и руки</option>
+                        <option value="burn_fast">Сбросить 8-15 кг без голодовок</option>
+                        <option value="all">Полная трансформация на чиле</option>
+                    </select>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-brand-border text-[11px] text-slate-400 flex items-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4 text-brand-neon shrink-0"></i>
+                    <span>Тренер свяжется лично в Telegram @aggres1veee в течение 15 минут.</span>
+                </div>
+
+                <button type="submit" id="submitOrderBtn" class="btn-cta w-full py-4 rounded-xl font-display font-black text-xs uppercase tracking-wider text-black bg-gradient-to-r from-brand-neon to-brand-lime hover:shadow-neon transition-all flex items-center justify-center gap-2">
+                    <span>Подтвердить и связаться с тренером 🚀</span>
+                </button>
+            </form>
+
+            <!-- Success State -->
+            <div id="modalSuccess" class="hidden text-center py-6 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-brand-neon/20 text-brand-neon border border-brand-neon flex items-center justify-center mx-auto text-2xl">
+                    ✓
+                </div>
+                <h4 class="font-display font-black text-2xl text-white uppercase">Красава, заявка принята!</h4>
+                <p class="text-xs text-slate-300 max-w-xs mx-auto">
+                    Я уже получил твои данные. Нажми кнопку ниже, чтобы сразу открыть диалог в Telegram со мной и получить первый бонус!
+                </p>
+                <a id="telegramDirectBtn" href="https://t.me/aggres1veee" target="_blank" class="btn-cta inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-display font-black text-xs uppercase bg-brand-neon text-black shadow-neon hover:scale-105 transition">
+                    Открыть диалог с @aggres1veee <svg class="w-4 h-4 fill-black shrink-0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING INTERACTIVE COACH CHAT WIDGET -->
+    <div id="chatWidgetContainer" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        
+        <!-- Teaser Popup Pill (appears after 3s) -->
+        <div id="chatTeaserPill" onclick="toggleCoachChat()" class="mb-3 bg-brand-card/95 border border-brand-neon/50 shadow-neon backdrop-blur-xl px-4 py-2.5 rounded-2xl text-xs text-slate-200 cursor-pointer animate-scale-up flex items-center gap-2 hover:border-brand-neon hover:scale-105 transition" style="display: none;">
+            <span class="w-2 h-2 rounded-full bg-brand-neon animate-ping"></span>
+            <span class="font-bold">👋 Тренер онлайн! Нажми, чтобы спросить</span>
+        </div>
+
+        <!-- Chat Window -->
+        <div id="chatWindow" class="chat-window bg-brand-card border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden mb-3 animate-scale-up" style="display: none;">
+            <!-- Chat Header -->
+            <div class="p-4 bg-brand-dark border-b border-brand-border flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-neon to-brand-lime p-0.5 flex items-center justify-center text-xl">
+                            🏋️
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-brand-neon border-2 border-brand-dark"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-black text-xs uppercase text-white" data-i18n="chatTitle">Тренер @aggres1veee</h4>
+                        <span class="text-[10px] text-brand-neon flex items-center gap-1 font-semibold" data-i18n="chatStatus">
+                            Отвечаю лично за пару минут
+                        </span>
+                    </div>
+                </div>
+                <button type="button" id="chatCloseBtn" onclick="toggleCoachChat()" class="w-8 h-8 rounded-lg bg-white/[0.04] text-slate-400 hover:text-white flex items-center justify-center transition">
+                    <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Messages Stream Area -->
+            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3.5 flex flex-col">
+                <!-- Initial Coach Welcome -->
+                <div class="flex flex-col gap-2 max-w-[90%] self-start animate-scale-up">
+                    <div class="chat-bubble-coach p-3.5 text-xs text-slate-200 leading-relaxed" data-i18n="chatGreeting">
+                        Йоу! Я на связи. Есть вопрос по программе или питанию? Выбирай частый вопрос ниже или пиши свой, я сразу разберу:
+                    </div>
+                </div>
+
+                <!-- Quick Action Chips -->
+                <div class="flex flex-wrap gap-2 pt-1 pb-1">
+                    <button type="button" class="chat-chip px-3 py-1.5 rounded-xl text-[11px] font-bold bg-white/[0.04] border border-brand-border text-slate-300 hover:border-brand-neon hover:text-brand-neon transition" onclick="handleChatChip('burger')">
+                        🍔 Как есть бургеры и худеть?
+                    </button>
+                    <button type="button" class="chat-chip px-3 py-1.5 rounded-xl text-[11px] font-bold bg-white/[0.04] border border-brand-border text-slate-300 hover:border-brand-neon hover:text-brand-neon transition" onclick="handleChatChip('split')">
+                        ⚡ Что выбрать: Сплит или Full Body?
+                    </button>
+                    <button type="button" class="chat-chip px-3 py-1.5 rounded-xl text-[11px] font-bold bg-white/[0.04] border border-brand-border text-slate-300 hover:border-brand-gold hover:text-brand-gold transition" onclick="handleChatChip('vip')">
+                        👑 Хочу на личное ведение
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Input & Submit Area -->
+            <form id="chatForm" onsubmit="handleChatSubmit(event)" class="p-3 bg-brand-dark/90 border-t border-brand-border flex items-center gap-2">
+                <input type="text" id="chatInput" placeholder="Напиши вопрос тренеру..." class="flex-1 bg-brand-black border border-brand-border rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-neon transition">
+                <button type="submit" class="w-9 h-9 rounded-xl bg-brand-neon text-black flex items-center justify-center font-bold hover:shadow-neon transition shrink-0" title="Отправить">
+                    <svg class="w-4 h-4 fill-black" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- Floating Chat Trigger Button -->
+        <button type="button" id="chatWidgetBtn" onclick="toggleCoachChat()" class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-neon via-brand-lime to-brand-neon shadow-neon hover:scale-110 active:scale-95 transition-all flex items-center justify-center text-black relative group cursor-pointer z-50">
+            <svg class="w-7 h-7 fill-black group-hover:rotate-12 transition-transform" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+            <!-- Online status green pulse -->
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 rounded-full bg-brand-neon border-2 border-brand-black animate-pulse"></span>
+            <!-- Unread badge -->
+            <span id="chatBadge" class="absolute -top-1 -left-1 px-1.5 py-0.5 rounded-full text-[9px] font-black bg-brand-fire text-white animate-badge-bounce">
+                1
+            </span>
+        </button>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        try { lucide.createIcons(); } catch(e) {}
+    </script>
+</body>
+</html>
